@@ -13,7 +13,7 @@ G = 6.67430 * 1e-11  # N m^2 / kg^2
 
 
 @njit(fastmath=True)
-def first_order_rk4(x: np.array, y0: float, y0_pr: float, ode_func, *ode_func_args):
+def first_order_rk4(x: np.array, y0: float, y0_pr: float, ode_func: callable, *ode_func_args):
     """
     rk4 solver using the equations that I
     shamelessly ripped from:
@@ -32,7 +32,7 @@ def first_order_rk4(x: np.array, y0: float, y0_pr: float, ode_func, *ode_func_ar
         Due to the njit decorator, the
         ode_func must also be numba'd
         The form should be:
-        d^2/dx^2 y = ode_func(x, y, *ode_func_args)
+        d/dx y = ode_func(x, y, *ode_func_args)
     ode_func_args : tuple (optional)
         Args for ode_func
     
@@ -61,7 +61,7 @@ def first_order_rk4(x: np.array, y0: float, y0_pr: float, ode_func, *ode_func_ar
     return y
 
 
-def first_order_rk4_slow(x: np.array, y0: float, y0_pr: float, ode_func, *ode_func_args):
+def first_order_rk4_slow(x: np.array, y0: float, y0_pr: float, ode_func: callable, *ode_func_args):
     """
     This version does _not_ use numba.
     This is convenient because it can be used with
@@ -81,7 +81,7 @@ def first_order_rk4_slow(x: np.array, y0: float, y0_pr: float, ode_func, *ode_fu
     ode_func : function
         The function that will be solved.
         The form should be:
-        d^2/dx^2 y = ode_func(x, y, *ode_func_args)
+        d/dx y = ode_func(x, y, *ode_func_args)
     ode_func_args : tuple (optional)
         Args for ode_func
     
