@@ -83,7 +83,7 @@ int array_to_file(double str_array[], int array_len, string file_name)
 	int tot = 0;
 	for (int i = 0; i < array_len; i++)
 	{
-		my_out_stream << str_array[i] << endl;
+		my_out_stream << str_array[i] << "," << endl;
 		tot = i + 1;
 	}
 
@@ -93,7 +93,7 @@ int array_to_file(double str_array[], int array_len, string file_name)
 int main(){
     const int n = 500;
     const double x_initial = 0.;
-    const double x_final = 10.;
+    const double x_final = 2 * M_PI;
     const double dx = (x_final - x_initial) / (n - 1);
     double x[n];
     const double y0 = 0.;
